@@ -1,28 +1,34 @@
 import React, { useState, useEffect } from "react";
 import PageTemplate from '../components/templateMovieListPage';
 import { BaseMovieProps } from "../types/interfaces";
-import { getMovies } from "../api/tmdb-api"
-import { useNavigate } from 'react-router-dom';
+import { getMovies } from "../api/tmdb-api";
 
 const HomePage: React.FC = () => {
   const [movies, setMovies] = useState<BaseMovieProps[]>([]);
-  const favourites = movies.filter(m => m.favourite)
-  localStorage.setItem('favourites', JSON.stringify(favourites))
-  // New function
+
+  // New function: add movie to favourites and persist
   const addToFavourites = (movieId: number) => {
     const updatedMovies = movies.map((m: BaseMovieProps) =>
       m.id === movieId ? { ...m, favourite: true } : m
     );
     setMovies(updatedMovies);
+    localStorage.setItem('movies', JSON.stringify(updatedMovies));
   };
 
-   useEffect(() => {
-    getMovies().then(movies => {
-      setMovies(movies);
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const stored = localStorage.getItem("movies");
+      if (stored) {
+        setMovies(JSON.parse(stored));
+      } else {
+        const data = await getMovies();
+        setMovies(data);
+        localStorage.setItem("movies", JSON.stringify(data));
+      }
+    };
 
+    fetchMovies();
+  }, []);
 
   return (
     <PageTemplate
@@ -32,4 +38,5 @@ const HomePage: React.FC = () => {
     />
   );
 };
+
 export default HomePage;
