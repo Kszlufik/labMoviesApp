@@ -5,10 +5,14 @@ import HomePage from "./pages/homePage";
 import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favouriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage"; // NEW
+import SiteHeader from './components/siteHeader'
+
+
 
 const App = () => {
   return (
     <BrowserRouter>
+     <SiteHeader />      {/* New Header  */}
       <ul>
         <li>
           <Link to="/">Home</Link>
