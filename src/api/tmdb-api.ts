@@ -1,3 +1,5 @@
+import { BaseMovieProps } from "../types/interfaces";
+
 export const getMovies = () => {
     return fetch(
       `https://api.themoviedb.org/3/discover/movie?api_key=${import.meta.env.VITE_TMDB_KEY}&language=en-US&include_adult=false&page=1`
@@ -40,3 +42,12 @@ export const getMovies = () => {
         return json.results;
       });
   };
+
+  export const getUpcomingMovies = async (): Promise<BaseMovieProps[]> => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/upcoming?api_key=${import.meta.env.VITE_TMDB_KEY}`
+  );
+  const data = await response.json();
+  return data.results;
+};
+

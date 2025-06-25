@@ -6,6 +6,7 @@ import MoviePage from "./pages/movieDetailsPage";
 import FavouriteMoviesPage from "./pages/favouriteMoviesPage";
 import MovieReviewPage from "./pages/movieReviewPage"; // NEW
 import SiteHeader from './components/siteHeader'
+import UpcomingMoviesPage from "./pages/upcomingMoviesPage";
 
 
 
@@ -27,6 +28,7 @@ const App = () => {
         <Route path="/movies/:id" element={<MoviePage />} />
         <Route path="/reviews/:id" element={<MovieReviewPage />} /> {/*slight improvment as i could not display the movies due to white page*/}
         <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/movies/upcoming" element={<UpcomingMoviesPage />} />
       </Routes>
     </BrowserRouter>
   );
