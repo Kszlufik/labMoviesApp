@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import PageTemplate from "../components/templateMovieListPage";
 import { BaseMovieProps } from "../types/interfaces";
 import { getUpcomingMovies } from "../api/tmdb-api"; // NEW endpoint
-import AddToFavouritesIcon from "../components/cardIcons/addToFavourites"; // NEW
+import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
+import AddToPlaylistIcon from "../components/cardIcons/addToPlaylist"; // NEW
 
 const UpcomingMoviesPage: React.FC = () => {
   const [movies, setMovies] = useState<BaseMovieProps[]>([]);
@@ -26,7 +27,7 @@ const UpcomingMoviesPage: React.FC = () => {
     <PageTemplate
       title="Upcoming Movies"
       movies={movies}
-      action={(movie) => <AddToFavouritesIcon movie={movie} />}
+      action={(movie) => <AddToPlaylistIcon movie={movie} />}
     />
   );
 };
